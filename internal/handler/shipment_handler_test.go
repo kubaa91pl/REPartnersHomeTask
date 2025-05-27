@@ -7,33 +7,32 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"home.excersise/internal/app/shipment"
-
 	"github.com/stretchr/testify/assert"
+	"home.excersise/internal/model"
 )
 
 func TestCreateShipmentHandler(t *testing.T) {
 	tests := []struct {
 		name           string
-		request        shipment.ShipmentRequest
+		request        model.ShipmentRequest
 		expectedStatus int
-		expectedBody   shipment.ShipmentResult
+		expectedBody   model.ShipmentResult
 		shouldFail     bool
 	}{
 		{
 			name: "Happy Path",
-			request: shipment.ShipmentRequest{
+			request: model.ShipmentRequest{
 				Items: 501,
 				Packs: []int{250, 500, 1000},
 			},
 			expectedStatus: http.StatusOK,
-			expectedBody: shipment.ShipmentResult{
+			expectedBody: model.ShipmentResult{
 				PacksUsed: map[int]int{250: 1, 500: 1},
 			},
 		},
 		{
 			name: "Wrong - Bad request due to zero items",
-			request: shipment.ShipmentRequest{
+			request: model.ShipmentRequest{
 				Items: 0,
 				Packs: []int{250, 500},
 			},
@@ -53,7 +52,7 @@ func TestCreateShipmentHandler(t *testing.T) {
 			assert.Equal(t, tt.expectedStatus, rr.Code)
 
 			if !tt.shouldFail {
-				var result shipment.ShipmentResult
+				var result model.ShipmentResult
 				err := json.NewDecoder(rr.Body).Decode(&result)
 				assert.NoError(t, err)
 				assert.Equal(t, tt.expectedBody, result)

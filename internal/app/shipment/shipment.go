@@ -4,23 +4,25 @@ import (
 	"fmt"
 
 	packing "home.excersise/internal/domain/packing"
+	"home.excersise/internal/model"
+	"home.excersise/internal/repository"
 )
 
-type ShipmentRequest struct {
-	Items int   `json:"items"`
-	Packs []int `json:"packs"`
-}
-
-type ShipmentResult struct {
-	PacksUsed map[int]int `json:"packs_used"`
-}
-
-func CreateShipment(input ShipmentRequest) (ShipmentResult, error) {
+func CreateShipment(input model.ShipmentRequest, repo repository.ShipmentRepository) (model.ShipmentResult, error) {
 	p := &packing.PackingResult{}
 	err := p.Calculate(input.Items, input.Packs)
 	if err != nil {
-		return ShipmentResult{}, fmt.Errorf("error: CreateShipment fails due to: %w", err)
+		return model.ShipmentResult{}, fmt.Errorf("error: CreateShipment fails due to: %w", err)
 	}
 
-	return ShipmentResult{PacksUsed: p.PacksUsed}, nil
+	result := model.ShipmentResult{
+		PacksUsed: p.PacksUsed,
+	}
+
+	_, err = repo.Save(&result)
+	if err != nil {
+		return model.ShipmentResult{}, fmt.Errorf("failed to save shipment result: %w", err)
+	}
+
+	return result, nil
 }
