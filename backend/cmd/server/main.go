@@ -10,7 +10,7 @@ import (
 func main() {
 	log.Println("Server running at http://localhost:8080")
 
-	err := http.ListenAndServe(":8080", server.NewRouter())
+	err := http.ListenAndServe(":8080", server.NewRouterWithCORS())
 	if err != nil {
 		log.Fatal("Server errors due to: " + err.Error())
 	}
