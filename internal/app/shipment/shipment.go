@@ -1,6 +1,10 @@
 package shipment
 
-import packing "home.excersise/internal/domain/packing"
+import (
+	"fmt"
+
+	packing "home.excersise/internal/domain/packing"
+)
 
 type ShipmentRequest struct {
 	Items int   `json:"items"`
@@ -11,10 +15,12 @@ type ShipmentResult struct {
 	PacksUsed map[int]int `json:"packs_used"`
 }
 
-func CreateShipment(input ShipmentRequest) ShipmentResult {
+func CreateShipment(input ShipmentRequest) (ShipmentResult, error) {
 	p := &packing.PackingResult{}
-	p.Calculate(input.Items, input.Packs)
-	return ShipmentResult{
-		PacksUsed: p.PacksUsed,
+	err := p.Calculate(input.Items, input.Packs)
+	if err != nil {
+		return ShipmentResult{}, fmt.Errorf("error: CreateShipment fails due to: %w", err)
 	}
+
+	return ShipmentResult{PacksUsed: p.PacksUsed}, nil
 }

@@ -1,15 +1,28 @@
 package packing
 
 import (
+	"errors"
 	"math"
 	"sort"
+)
+
+var (
+	ErrInvalidItemCount = errors.New("items must be greater than zero")
+	ErrNoPackSizes      = errors.New("at least one pack size must be provided")
 )
 
 type PackingResult struct {
 	PacksUsed map[int]int
 }
 
-func (p *PackingResult) Calculate(itemsOrdered int, packSizes []int) {
+func (p *PackingResult) Calculate(itemsOrdered int, packSizes []int) error {
+	if itemsOrdered <= 0 {
+		return ErrInvalidItemCount
+	}
+	if len(packSizes) == 0 {
+		return ErrNoPackSizes
+	}
+
 	sort.Sort(sort.Reverse(sort.IntSlice(packSizes)))
 
 	best := make(map[int]int)
@@ -52,4 +65,6 @@ func (p *PackingResult) Calculate(itemsOrdered int, packSizes []int) {
 
 	dfs(0, 0, 0, make(map[int]int))
 	p.PacksUsed = best
+
+	return nil
 }
