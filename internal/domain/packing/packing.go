@@ -5,11 +5,11 @@ import (
 	"sort"
 )
 
-type Shipment struct {
+type PackingResult struct {
 	PacksUsed map[int]int
 }
 
-func (s *Shipment) Create(itemsOrdered int, packSizes []int) {
+func (p *PackingResult) Calculate(itemsOrdered int, packSizes []int) {
 	sort.Sort(sort.Reverse(sort.IntSlice(packSizes)))
 
 	best := make(map[int]int)
@@ -51,5 +51,5 @@ func (s *Shipment) Create(itemsOrdered int, packSizes []int) {
 	}
 
 	dfs(0, 0, 0, make(map[int]int))
-	s.PacksUsed = best
+	p.PacksUsed = best
 }

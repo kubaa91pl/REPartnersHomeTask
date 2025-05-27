@@ -41,9 +41,9 @@ func TestShipment_Create(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			shipment := &Shipment{}
-			shipment.Create(tt.amount, DefaultPackSizes)
-			assert.Equal(t, tt.expected, shipment.PacksUsed)
+			p := &PackingResult{}
+			p.Calculate(tt.amount, DefaultPackSizes)
+			assert.Equal(t, tt.expected, p.PacksUsed)
 		})
 	}
 }
