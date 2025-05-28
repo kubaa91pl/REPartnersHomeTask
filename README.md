@@ -50,7 +50,7 @@ cd frontend/quasar-project
 npm test
 ``` 
 
-## 🚀 Running Locally
+## 🚀 Running Application Locally
 
 - Server runs at http://localhost:8080
 - UI runs at http://localhost:9000
@@ -65,7 +65,7 @@ cd frontend/quasar-project
 quasar dev
 ```
 
-## 🐳 Running with Docker Compose
+## 🐳 Running Application with Docker Compose
 
 To build and start both the backend and frontend using Docker Compose, 
 execute following from the main project directory:
