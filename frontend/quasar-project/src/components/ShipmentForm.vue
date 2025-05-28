@@ -59,7 +59,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import axios from 'axios'
+import { api } from 'boot/axios'
 import {
   isPositiveInteger,
   addPackSize as addPackSizeHelper,
@@ -101,7 +101,7 @@ async function submit() {
   loading.value = true
 
   try {
-    const response = await axios.post('http://localhost:8080/shipment', {
+    const response = await api.post('/shipment', {
       items: items.value,
       packs: useDefaultPacks.value ? [] : packSizes.value
     })

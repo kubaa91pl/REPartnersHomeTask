@@ -1,13 +1,19 @@
 import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
 
+const backendURL =
+  import.meta.env.VITE_BACKEND_URL ||
+  (location.hostname === 'localhost'
+    ? 'http://localhost:8080'
+    : `${location.protocol}//${location.hostname}/api`)
+
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
 // If any client changes this (global) instance, it might be a
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' })
+const api = axios.create({ baseURL: backendURL })
 
 export default defineBoot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
