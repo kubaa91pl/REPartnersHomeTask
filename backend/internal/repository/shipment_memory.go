@@ -30,6 +30,10 @@ func NewMemoryRepository() ShipmentRepository {
 	}
 }
 
+// Save stores a ShipmentResult in memory and assigns it a new UUID.
+//
+// Returns the generated UUID string on success. If the input result is nil,
+// it returns ErrCannotSaveNilResult.
 func (r *memoryRepo) Save(result *model.ShipmentResult) (string, error) {
 	if result == nil {
 		return "", ErrCannotSaveNilResult
@@ -43,6 +47,10 @@ func (r *memoryRepo) Save(result *model.ShipmentResult) (string, error) {
 	return id, nil
 }
 
+// Get retrieves a ShipmentResult from memory by its ID.
+//
+// If the ID is empty, it returns ErrEmptyShipmentID.
+// If no result is found for the given ID, it returns ErrShipmentNotFound.
 func (r *memoryRepo) Get(id string) (*model.ShipmentResult, error) {
 	if id == "" {
 		return nil, ErrEmptyShipmentID

@@ -6,6 +6,10 @@ import (
 	"home.excersise/internal/handler"
 )
 
+// NewRouterWithCORS creates a new HTTP router wrapped with CORS middleware.
+//
+// This allows cross-origin requests, typically required when frontend and backend
+// run on different origins during development or deployment.
 func NewRouterWithCORS() http.Handler {
 	return withCORS(newRouter())
 }
