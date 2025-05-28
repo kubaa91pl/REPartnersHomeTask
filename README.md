@@ -18,12 +18,12 @@ Example:
 
 - Dynamic programming-based calculation
 - Extensible pack size configuration
+- Possibility of using default pack sizes
 - Memory-based persistence
 - Full HTTP API (Go `net/http`)
 - Responsive frontend using Quasar
 - Unit tests (backend + frontend)
-- Edge-case: `500000 items` with `{23, 31, 53}` handled efficiently
-
+- Edge-case: large amount of items `e.g. 500000 items` with low capacity packs `e.g. {23, 31, 53}` handled efficiently
 ---
 
 ## 🧰 Technologies
