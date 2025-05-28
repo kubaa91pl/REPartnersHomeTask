@@ -28,9 +28,10 @@
         <q-btn flat color="primary" @click="addPackSize">Add Pack Size</q-btn>
       </div>
 
-      <q-btn color="primary" @click="submit" :loading="loading">
+      <q-btn color="primary" @click="submit" :loading="loading" :disable="items <= 0">
         Submit
       </q-btn>
+
 
       <div v-if="result">
         <h3 class="q-mt-lg">Shipment Result</h3>
