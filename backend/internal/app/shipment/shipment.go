@@ -16,7 +16,7 @@ func CreateShipment(input model.ShipmentRequest, repo repository.ShipmentReposit
 	p := &packing.PackingResult{}
 	err := p.Calculate(input.Items, input.Packs)
 	if err != nil {
-		return model.ShipmentResult{}, fmt.Errorf("error: CreateShipment fails due to: %w", err)
+		return model.ShipmentResult{}, fmt.Errorf("shipment calculation failed: %w", err)
 	}
 
 	result := model.ShipmentResult{
@@ -25,7 +25,7 @@ func CreateShipment(input model.ShipmentRequest, repo repository.ShipmentReposit
 
 	_, err = repo.Save(&result)
 	if err != nil {
-		return model.ShipmentResult{}, fmt.Errorf("error: failed to save shipment result: %w", err)
+		return model.ShipmentResult{}, fmt.Errorf("shipment save failed: %w", err)
 	}
 
 	return result, nil
