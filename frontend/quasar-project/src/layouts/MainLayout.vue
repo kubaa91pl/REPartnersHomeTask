@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          REPartners - Order Packs UI
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>

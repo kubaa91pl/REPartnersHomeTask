@@ -2,7 +2,7 @@
   "name": "quasar-project",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "productName": "REPartners - Order Packs UI",
   "author": "Kuba Niżyński <kubanizynski@wp.pl>",
   "type": "module",
   "private": true,
