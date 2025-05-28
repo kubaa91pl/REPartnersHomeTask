@@ -8,12 +8,16 @@ import (
 	"home.excersise/internal/model"
 )
 
+var (
+	ErrCannotSaveNilResult = errors.New("cannot save nil result")
+	ErrShipmentNotFound    = errors.New("shipment not found")
+	ErrEmptyShipmentID     = errors.New("shipment ID must not be empty")
+)
+
 type ShipmentRepository interface {
 	Save(result *model.ShipmentResult) (string, error)
 	Get(id string) (*model.ShipmentResult, error)
 }
-
-var ErrShipmentNotFound = errors.New("shipment not found")
 
 type memoryRepo struct {
 	data map[string]*model.ShipmentResult
@@ -27,6 +31,10 @@ func NewMemoryRepository() ShipmentRepository {
 }
 
 func (r *memoryRepo) Save(result *model.ShipmentResult) (string, error) {
+	if result == nil {
+		return "", ErrCannotSaveNilResult
+	}
+
 	r.mu.Lock()
 	defer r.mu.Unlock()
 	id := uuid.New().String()
@@ -36,6 +44,10 @@ func (r *memoryRepo) Save(result *model.ShipmentResult) (string, error) {
 }
 
 func (r *memoryRepo) Get(id string) (*model.ShipmentResult, error) {
+	if id == "" {
+		return nil, ErrEmptyShipmentID
+	}
+
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	result, ok := r.data[id]
