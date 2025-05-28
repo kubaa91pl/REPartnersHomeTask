@@ -20,8 +20,8 @@ type ShipmentRepository interface {
 }
 
 type memoryRepo struct {
-	data map[string]*model.ShipmentResult
 	mu   sync.RWMutex
+	data map[string]*model.ShipmentResult
 }
 
 func NewMemoryRepository() ShipmentRepository {
