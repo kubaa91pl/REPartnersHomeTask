@@ -60,9 +60,15 @@
 <script setup>
 import { ref, computed } from 'vue'
 import axios from 'axios'
+import {
+  isPositiveInteger,
+  addPackSize as addPackSizeHelper,
+  removePackSize as removePackSizeHelper,
+  formatPacks
+} from 'src/helpers/ShipmentHelpers'
 
 const positiveIntegerRule = val =>
-  Number.isInteger(val) && val > 0 || 'Enter a positive whole number'
+    isPositiveInteger(val) || 'Enter a positive whole number'
 
 const items = ref(0)
 const useDefaultPacks = ref(true)
@@ -78,18 +84,15 @@ const columns = [
 
 const formattedPacks = computed(() => {
   if (!result.value) return []
-  return Object.entries(result.value.packs_used).map(([pack, quantity]) => ({
-    pack,
-    quantity
-  }))
+  return formatPacks(result.value.packs_used)
 })
 
 function addPackSize() {
-  packSizes.value.push(0)
+  packSizes.value = addPackSizeHelper(packSizes.value)
 }
 
 function removePackSize(index) {
-  packSizes.value.splice(index, 1)
+  packSizes.value = removePackSizeHelper(packSizes.value, index)
 }
 
 async function submit() {
