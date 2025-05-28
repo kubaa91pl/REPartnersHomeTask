@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	ErrInvalidItemCount = errors.New("items must be greater than zero")
+	ErrInvalidItemCount = errors.New("number of items must be greater than zero")
 	ErrNoPackSizes      = errors.New("at least one pack size must be provided")
 )
 
