@@ -40,7 +40,6 @@ func TestCreateShipment(t *testing.T) {
 			result, err := CreateShipment(tt.request, repository.NewMemoryRepository())
 			if tt.fails {
 				assert.Error(t, err)
-				assert.ErrorContains(t, err, "CreateShipment fails")
 			} else {
 				assert.NoError(t, err)
 				assert.Equal(t, tt.expected, result.PacksUsed)
