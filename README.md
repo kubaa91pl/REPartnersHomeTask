@@ -35,9 +35,25 @@ Example:
 
 ---
 
+## Running Unit Tests
+
+- Backend uses testing and testify packages.
+- Frontend uses vitest for testing.
+
+```bash
+# Backend
+cd backend
+go test ./...  
+
+# Frontend
+cd frontend/quasar-project
+npm test
+``` 
+
 ## 🚀 Running Locally
-Server runs at http://localhost:8080
-Frontend runs at http://localhost:9000
+
+- Server runs at http://localhost:8080
+- UI runs at http://localhost:9000
 
 ```bash
 # Backend
@@ -48,11 +64,3 @@ go run . serve
 cd frontend/quasar-project
 quasar dev
 ```
-
-## 🚀 Running Unit Tests
-
-```bash
-# Backend
-cd backend
-go test ./...  
-``` 
