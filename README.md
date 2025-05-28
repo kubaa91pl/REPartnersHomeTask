@@ -64,3 +64,24 @@ go run . serve
 cd frontend/quasar-project
 quasar dev
 ```
+
+## 🐳 Running with Docker Compose
+
+To build and start both the backend and frontend using Docker Compose, 
+execute following from the main project directory:
+```bash
+docker-compose up --build
+```
+
+This will:
+- Start the backend server at http://localhost:8080
+- Start the frontend UI at http://localhost:9000
+
+### 🔁 Hot Reloading
+
+Thanks to mounted volumes, any changes you make in local frontend/quasar-project or backend will be reflected without restarting the containers.
+
+### 🔎 Verifying in Browser
+After running the above command:
+Navigate to http://localhost:9000 in your browser to use the application UI
+The backend API will be accessible at http://localhost:8080
