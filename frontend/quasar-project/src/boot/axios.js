@@ -2,10 +2,9 @@ import { defineBoot } from '#q-app/wrappers'
 import axios from 'axios'
 
 const backendURL =
-  import.meta.env.VITE_BACKEND_URL ||
-  (location.hostname === 'localhost'
+  location.hostname === 'localhost'
     ? 'http://localhost:8080'
-    : `${location.protocol}//${location.hostname}/api`)
+    : 'https://repartnershometask.onrender.com'
 
 // Be careful when using SSR for cross-request state pollution
 // due to creating a Singleton instance here;
