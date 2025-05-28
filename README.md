@@ -43,7 +43,7 @@ Example:
 ```bash
 # Backend
 cd backend
-go test ./...  
+go test ./... -v
 
 # Frontend
 cd frontend/quasar-project
