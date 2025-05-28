@@ -10,15 +10,15 @@ Given a number of items ordered and available pack sizes, determine:
 3. **Minimize number of packs** (secondary priority).
 
 Example:
-- 501 items → Optimal: `1x500 + 1x250` (least extra items and fewer packs)
+- 501 items, for default pack sizes `{250, 500, 1000, 2000, 5000}` → Optimal: `1x500 + 1x250` (least extra items and fewer packs).
 
 ---
 
 ## 🧪 Features
 
 - Dynamic programming-based calculation
-- Extensible pack size configuration
 - Possibility of using default pack sizes
+- Extensible custom pack size configuration
 - Memory-based persistence
 - Full HTTP API (Go `net/http`)
 - Responsive frontend using Quasar
