@@ -47,3 +47,12 @@ go run . serve
 # Frontend
 cd frontend/quasar-project
 quasar dev
+```
+
+## 🚀 Running Unit Tests
+
+```bash
+# Backend
+cd backend
+go test ./...  
+``` 
