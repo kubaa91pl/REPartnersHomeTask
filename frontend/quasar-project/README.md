@@ -1,6 +1,6 @@
-# Quasar App (quasar-project)
+# REPartners - Order Packs UI
 
-A Quasar Project
+REPartners - Order Packs UI,
 
 ## Install the dependencies
 ```bash
