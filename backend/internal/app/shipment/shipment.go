@@ -23,7 +23,9 @@ func CreateShipment(input model.ShipmentRequest, repo repository.ShipmentReposit
 		PacksUsed: p.PacksUsed,
 	}
 
-	_, err = repo.Save(&result)
+	// Save the result and assign the generated ID.
+	// This step ensures the shipment is persisted and identifiable.
+	result.ID, err = repo.Save(&result)
 	if err != nil {
 		return model.ShipmentResult{}, fmt.Errorf("shipment save failed: %w", err)
 	}

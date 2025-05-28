@@ -12,10 +12,10 @@ var testPackSizes = []int{250, 500, 1000, 2000, 5000}
 
 func TestCreateShipment(t *testing.T) {
 	tests := []struct {
-		name     string
-		request  model.ShipmentRequest
-		expected map[int]int
-		fails    bool
+		name              string
+		request           model.ShipmentRequest
+		expectedPacksUsed map[int]int
+		fails             bool
 	}{
 		{
 			name: "Happy Path",
@@ -23,7 +23,7 @@ func TestCreateShipment(t *testing.T) {
 				Items: 242,
 				Packs: testPackSizes,
 			},
-			expected: map[int]int{250: 1},
+			expectedPacksUsed: map[int]int{250: 1},
 		},
 		{
 			name: "Wrong - Calculating packing result fails",
@@ -42,7 +42,8 @@ func TestCreateShipment(t *testing.T) {
 				assert.Error(t, err)
 			} else {
 				assert.NoError(t, err)
-				assert.Equal(t, tt.expected, result.PacksUsed)
+				assert.Equal(t, tt.expectedPacksUsed, result.PacksUsed)
+				assert.NotEmpty(t, result.ID)
 			}
 		})
 	}
