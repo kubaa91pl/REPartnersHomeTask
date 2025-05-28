@@ -10,8 +10,13 @@
         type="number"
       />
 
-      <div>
-        <label>Pack Sizes</label>
+      <q-toggle
+        v-model="useDefaultPacks"
+        label="Use default pack sizes"
+      />
+
+      <div v-if="!useDefaultPacks">
+        <label>Custom Pack Sizes</label>
         <div v-for="(size, index) in packSizes" :key="index" class="q-mb-sm">
           <q-input
             outlined
@@ -52,6 +57,7 @@ import { ref, computed } from 'vue'
 import axios from 'axios'
 
 const items = ref(0)
+const useDefaultPacks = ref(true)
 const packSizes = ref([250, 500, 1000])
 const result = ref(null)
 const error = ref(null)
@@ -82,7 +88,7 @@ async function submit() {
   try {
     const response = await axios.post('http://localhost:8080/shipment', {
       items: items.value,
-      packs: packSizes.value
+      packs: useDefaultPacks.value ? [] : packSizes.value
     })
     result.value = response.data
   } catch (err) {

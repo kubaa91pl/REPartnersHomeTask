@@ -9,6 +9,10 @@ import (
 )
 
 func CreateShipment(input model.ShipmentRequest, repo repository.ShipmentRepository) (model.ShipmentResult, error) {
+	if len(input.Packs) == 0 {
+		input.Packs = DefaultPackSizes
+	}
+
 	p := &packing.PackingResult{}
 	err := p.Calculate(input.Items, input.Packs)
 	if err != nil {
