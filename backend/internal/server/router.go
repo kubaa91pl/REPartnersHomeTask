@@ -21,8 +21,8 @@ func newRouter() http.Handler {
 }
 
 var allowedOrigins = map[string]bool{
-	"http://localhost:9000":         true,
-	"https://your-app.onrender.com": true,
+	"http://localhost:9000":                      true,
+	"https://repartnershometask-ui.onrender.com": true,
 }
 
 func withCORS(h http.Handler) http.Handler {
