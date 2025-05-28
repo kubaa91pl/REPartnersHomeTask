@@ -19,7 +19,7 @@
 
       <div v-if="!useDefaultPacks">
         <label>Custom Pack Sizes</label>
-        <div v-for="(size, index) in packSizes" :key="index" class="q-mb-sm">
+        <div v-for="(size, index) in packSizes" :key="index" class="q-mb-sm row items-center">
           <q-input
             outlined
             v-model.number="packSizes[index]"
@@ -27,6 +27,7 @@
             placeholder="e.g. 250"
             :rules="[positiveIntegerRule]"
           />
+           <q-btn icon="close" color="negative" size='xs' flat dense @click="removePackSize(index)" aria-label="Remove"></q-btn>
         </div>
         <q-btn flat color="primary" @click="addPackSize">Add Pack Size</q-btn>
       </div>
@@ -85,6 +86,10 @@ const formattedPacks = computed(() => {
 
 function addPackSize() {
   packSizes.value.push(0)
+}
+
+function removePackSize(index) {
+  packSizes.value.splice(index, 1)
 }
 
 async function submit() {
