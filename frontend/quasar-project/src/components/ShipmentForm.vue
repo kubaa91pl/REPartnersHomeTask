@@ -8,6 +8,8 @@
         v-model.number="items"
         label="Number of Items"
         type="number"
+        placeholder="e.g. 250"
+        :rules="[positiveIntegerRule]"
       />
 
       <q-toggle
@@ -23,6 +25,7 @@
             v-model.number="packSizes[index]"
             type="number"
             placeholder="e.g. 250"
+            :rules="[positiveIntegerRule]"
           />
         </div>
         <q-btn flat color="primary" @click="addPackSize">Add Pack Size</q-btn>
@@ -56,6 +59,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import axios from 'axios'
+
+const positiveIntegerRule = val =>
+  Number.isInteger(val) && val > 0 || 'Enter a positive whole number'
 
 const items = ref(0)
 const useDefaultPacks = ref(true)
