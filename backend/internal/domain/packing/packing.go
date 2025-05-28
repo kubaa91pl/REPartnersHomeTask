@@ -15,10 +15,13 @@ type PackingResult struct {
 	PacksUsed map[int]int
 }
 
-// Calculate determines the optimal number of packs to fulfill the item order.
+// Calculate computes the optimal number of packs needed to fulfill the item order.
+//
 // It uses a dynamic programming approach to minimize:
-// 1. Extra items sent (items sent - items ordered)
-// 2. Number of packs used (if multiple results have same extra)
+// 1. Extra items sent (i.e., items sent minus items ordered)
+// 2. Number of packs used (in case of equal extra)
+//
+// Returns an error if the input is invalid.
 func (p *PackingResult) Calculate(itemsOrdered int, packSizes []int) error {
 	// Validate input
 	if itemsOrdered <= 0 {
