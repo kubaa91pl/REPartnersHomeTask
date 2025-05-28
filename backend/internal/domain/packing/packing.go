@@ -54,7 +54,7 @@ func (p *PackingResult) Calculate(itemsOrdered int, packSizes []int) error {
 		for i := 0; i <= maxCount; i++ {
 			next := make(map[int]int)
 			for k, v := range used {
-				next[k] = v
+				next[k] = v //TODO: replace loop with maps.copy
 			}
 			if i > 0 {
 				next[size] = i
