@@ -43,6 +43,13 @@ export default defineConfig((ctx) => {
         node: 'node20'
       },
 
+      extendViteConf (viteConf) {
+        viteConf.server = {
+          ...viteConf.server,
+          allowedHosts: ['repartnershometask-ui.onrender.com']
+        }
+      },
+
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
