@@ -21,7 +21,7 @@ func CreateShipment(input model.ShipmentRequest, repo repository.ShipmentReposit
 
 	_, err = repo.Save(&result)
 	if err != nil {
-		return model.ShipmentResult{}, fmt.Errorf("failed to save shipment result: %w", err)
+		return model.ShipmentResult{}, fmt.Errorf("error: failed to save shipment result: %w", err)
 	}
 
 	return result, nil
