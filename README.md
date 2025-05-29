@@ -91,3 +91,5 @@ The backend API will be accessible at `http://localhost:8080`
 
 - Frontend (UI): `https://repartnershometask-ui.onrender.com`
 - Backend API: `https://repartnershometask.onrender.com/shipment` (POST endpoint)
+
+⚠️ Note: If the app has been idle for a while, the first request may take up to 50 seconds while the service wakes up.
